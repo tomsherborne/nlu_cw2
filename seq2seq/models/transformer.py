@@ -245,8 +245,7 @@ def base_architecture(args):
     args.decoder_attention_heads = getattr(args, 'decoder_attention_heads', args.encoder_attention_heads)
 
     # Dropout and activation
-    args.dropout = getattr(args, 'dropout', 0.4)
-    args.attention_dropout = getattr(args, 'attention_dropout', 0.4)
-    args.activation_dropout = getattr(args, 'activation_dropout', 0.4)
+    args.dropout = getattr(args, 'dropout', 0.1)
+    args.attention_dropout = getattr(args, 'attention_dropout', 0.2)
+    args.activation_dropout = getattr(args, 'activation_dropout', 0.1)
     args.no_scale_embedding = getattr(args, 'no_scale_embedding', False)
-
