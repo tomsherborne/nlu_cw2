@@ -94,13 +94,13 @@ class TransformerEncoder(Seq2SeqEncoder):
         src_embeddings = embeddings.clone()
 
         '''
-        ___QUESTION-7-DESCRIBE-A-START___
+        ___QUESTION-6-DESCRIBE-A-START___
         What is the purpose of the positional embeddings in the encoder and decoder? Why can't we use only
         the embeddings similar to for the LSTM? 
         '''
         embeddings += self.embed_positions(src_tokens)
         '''
-        ___QUESTION-7-DESCRIBE-A-END___
+        ___QUESTION-6-DESCRIBE-A-END___
         '''
         forward_state = F.dropout(embeddings, p=self.dropout, training=self.training)
 
@@ -184,13 +184,13 @@ class TransformerDecoder(Seq2SeqDecoder):
             is_attention_layer = layer_idx == len(self.layers) - 1
             encoder_state = encoder_out['src_out'] if encoder_out is not None else None
             '''
-            ___QUESTION-7-DESCRIBE-B-START___
+            ___QUESTION-6-DESCRIBE-B-START___
             What is the purpose of self_attn_mask? Why do we need it in the decoder but not in the encoder?
             Why do we not need a mask for incremental decoding?
             '''
             self_attn_mask = self.buffered_future_mask(forward_state) if incremental_state is None else None
             '''
-            ___QUESTION-7-DESCRIBE-B-END___
+            ___QUESTION-6-DESCRIBE-B-END___
             '''
 
             forward_state, layer_attn = layer(state=forward_state,
@@ -212,13 +212,13 @@ class TransformerDecoder(Seq2SeqDecoder):
         # Project into output layer
         if not features_only:
             '''
-            ___QUESTION-7-DESCRIBE-C-START___
+            ___QUESTION-6-DESCRIBE-C-START___
             Why do we need a linear projection after the decoder layers? What is the dimensionality of forward_state
             after this line? What would the output represent if features_only=True?
             '''
             forward_state = self.embed_out(forward_state)
             '''
-            ___QUESTION-7-DESCRIBE-C-END___
+            ___QUESTION-6-DESCRIBE-C-END___
             '''
         return forward_state, {
             "attn_state": attn_state,

@@ -29,14 +29,14 @@ class TransformerEncoderLayer(nn.Module):
         residual = state.clone()
 
         '''
-        ___QUESTION-7-DESCRIBE-D-START___
+        ___QUESTION-6-DESCRIBE-D-START___
         What is the purpose of encoder_padding_mask? What will the output shape of `state' Tensor 
         be after multi-head attention? HINT: formulate your  answer in terms of 
         constituent variables like batch_size, embed_dim etc...
         '''
         state, _ = self.self_attn(query=state, key=state, value=state, key_padding_mask=encoder_padding_mask)
         '''
-        ___QUESTION-7-DESCRIBE-D-END___
+        ___QUESTION-6-DESCRIBE-D-END___
         '''
 
         state = F.dropout(state, p=self.dropout, training=self.training)
@@ -112,7 +112,7 @@ class TransformerDecoderLayer(nn.Module):
 
         residual = state.clone()
         '''
-        ___QUESTION-7-DESCRIBE-E-START___
+        ___QUESTION-6-DESCRIBE-E-START___
         How does encoder attention differ from self attention? What is the difference between key_padding_mask 
         and attn_mask? If you understand this difference, then why don't we need to give attn_mask here?
         '''
@@ -122,7 +122,7 @@ class TransformerDecoderLayer(nn.Module):
                                         key_padding_mask=encoder_padding_mask,
                                         need_weights=need_attn or (not self.training and self.need_attn))
         '''
-        ___QUESTION-7-DESCRIBE-E-END___
+        ___QUESTION-6-DESCRIBE-E-END___
         '''
 
         state = F.dropout(state, p=self.dropout, training=self.training)
@@ -151,7 +151,7 @@ class MultiHeadAttention(nn.Module):
                  self_attention=False,
                  encoder_decoder_attention=False):
         '''
-        ___QUESTION-8-MULTIHEAD-ATTENTION-NOTE
+        ___QUESTION-7-MULTIHEAD-ATTENTION-NOTE
         You shouldn't need to change the __init__ of this class for your attention implementation
         '''
         super().__init__()
@@ -198,7 +198,7 @@ class MultiHeadAttention(nn.Module):
         assert self.embed_dim == embed_dim
 
         '''
-        ___QUESTION-8-MULTIHEAD-ATTENTION-START
+        ___QUESTION-7-MULTIHEAD-ATTENTION-START
         Implement Multi-Head attention  according to Section 3.2.2 of https://arxiv.org/pdf/1706.03762.pdf.
         Note that you will have to handle edge cases for best model performance. Consider what behaviour should
         be expected if attn_mask or key_padding_mask are given?
@@ -214,7 +214,7 @@ class MultiHeadAttention(nn.Module):
         # TODO: --------------------------------------------------------------------- CUT
 
         '''
-        ___QUESTION-8-MULTIHEAD-ATTENTION-END
+        ___QUESTION-7-MULTIHEAD-ATTENTION-END
         '''
 
         return attn, attn_weights
